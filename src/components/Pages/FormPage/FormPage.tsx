@@ -77,6 +77,11 @@ const getFormattedPhoneNum = (input: string) => {
 
 export default function FormPage() {
 
+    interface IFormErrors{
+        email: boolean,
+        password: boolean,
+    }
+
     interface IFormFields {
         firstName: string,
         lastName: string,
@@ -93,12 +98,21 @@ export default function FormPage() {
         phoneNo: '',
     } as IFormFields);
 
+    const [formErrors, setFormErrors] = React.useState<IFormErrors>({
+        email: false,
+        password: false,
+    } as IFormErrors);
+
     const handleName = (e: React.ChangeEvent<HTMLInputElement>) => {
         setFormFields({ ...formFields, [e.target.id]: e.target.value.charAt(0).toUpperCase() + e.target.value.slice(1) });
     }
 
     const handlePhoneNumber = (e: React.ChangeEvent<HTMLInputElement>) => {
         setFormFields({ ...formFields, [e.target.id]: getFormattedPhoneNum(e.target.value) });
+    }
+
+    const handleEmail = (e: React.ChangeEvent<HTMLInputElement>) => {
+        setFormFields({ ...formFields, [e.target.id]: e.target.value });
     }
 
     React.useEffect(() => { console.log(formFields) }, [formFields])
@@ -153,8 +167,10 @@ export default function FormPage() {
 
                     <Grid item xs={12}>
                         <FormInput
+                            value={formFields.email}
+                            onChange={handleEmail}
                             type="email"
-                            id="outlined-basic"
+                            id="email"
                             label="Email"
                             variant="outlined"
                             fullWidth
