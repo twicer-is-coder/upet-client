@@ -18,7 +18,7 @@ const FormInput = styled(TextField)({
     // backgroundColor: '#fff',
 
     '& label.Mui-focused': {
-        color: 'grey',
+        color: '#31E6C0',
     },
     '& .MuiInput-underline:after': {
         borderBottomColor: '#DFDFDF',
@@ -49,10 +49,34 @@ const SubmitButton = styled(Button)({
         backgroundColor: '#31E6A0',
         borderColor: '#0062cc',
         boxShadow: 'none',
-      },
+    },
 })
 
 export default function FormPage() {
+
+    interface IFormFields {
+        firstName: string,
+        lastName: string,
+        email: string,
+        password: string,
+        phoneNo: string,
+    }
+
+    const [formFields, setFormFields] = React.useState<IFormFields>({
+        firstName: '',
+        lastName: '',
+        email: '',
+        password: '',
+        phoneNo: '',
+    } as IFormFields);
+
+
+    const handleName = (e: React.ChangeEvent<HTMLInputElement>) => {
+        setFormFields({ ...formFields, [e.target.id]: e.target.value.charAt(0).toUpperCase() + e.target.value.slice(1) });
+    }
+
+    React.useEffect(() => { console.log(formFields) }, [formFields])
+
     return (
         <MainContainer>
 
@@ -65,15 +89,21 @@ export default function FormPage() {
 
                     <Grid item xs={6}>
                         <FormInput
-                            id="outlined-basic"
+                            value={formFields.firstName}
+                            onChange={handleName}
+                            id="firstName"
                             label="First Name"
                             variant="outlined"
+                            helperText="Please enter your first name"
+                            error={formFields.firstName === ""}
                         />
                     </Grid>
 
                     <Grid item xs={6}>
                         <FormInput
-                            id="outlined-basic"
+                            value={formFields.lastName}
+                            onChange={handleName}
+                            id="lastName"
                             label="Last Name"
                             variant="outlined"
                         />
