@@ -52,6 +52,29 @@ const SubmitButton = styled(Button)({
     },
 })
 
+const getFormattedPhoneNum = (input: string) => {
+    let output = "(";
+    input.replace(/^\D*(\d{0,3})\D*(\d{0,3})\D*(\d{0,4})/, function (match, g1, g2, g3): any {
+        if (g1.length) {
+            output += g1;
+            if (g1.length == 3) {
+                output += ")";
+                if (g2.length) {
+                    output += " " + g2;
+                    if (g2.length == 3) {
+                        output += " - ";
+                        if (g3.length) {
+                            output += g3;
+                        }
+                    }
+                }
+            }
+        }
+    }
+    );
+    return output;
+}
+
 export default function FormPage() {
 
     interface IFormFields {
@@ -70,9 +93,12 @@ export default function FormPage() {
         phoneNo: '',
     } as IFormFields);
 
-
     const handleName = (e: React.ChangeEvent<HTMLInputElement>) => {
         setFormFields({ ...formFields, [e.target.id]: e.target.value.charAt(0).toUpperCase() + e.target.value.slice(1) });
+    }
+
+    const handlePhoneNumber = (e: React.ChangeEvent<HTMLInputElement>) => {
+        setFormFields({ ...formFields, [e.target.id]: getFormattedPhoneNum(e.target.value) });
     }
 
     React.useEffect(() => { console.log(formFields) }, [formFields])
@@ -110,7 +136,10 @@ export default function FormPage() {
                     </Grid>
 
                     <Grid item xs={12}>
-                        <FormInput id="outlined-basic"
+                        <FormInput
+                            value={formFields.phoneNo}
+                            id="phoneNo"
+                            onChange={handlePhoneNumber}
                             label="Phone Number"
                             variant="outlined"
                             InputProps={{
