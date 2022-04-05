@@ -6,10 +6,12 @@ import ThankYouPage from "./components/ThankYouPage/ThankYouPage"
 import './App.css';
 function App() {
   return (
-    <Routes>
-      <Route path="/" element={<FormPage />} />
-      <Route path="thankyou" element={<ThankYouPage />} />
-    </Routes>
+    <div className="app">
+      <Routes>
+        <Route path="/" element={<FormPage />} />
+        <Route path="thankyou" element={<ThankYouPage />} />
+      </Routes>
+    </div>
   );
 }
 
