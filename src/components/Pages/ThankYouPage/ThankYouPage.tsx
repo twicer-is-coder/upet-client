@@ -5,7 +5,6 @@ import DraftIcon from '@mui/icons-material/Drafts';
 import Typography from '@mui/material/Typography';
 
 import Header from '../../Header/Header';
-
 export default function ThankYouPage() {
 
     const MainContainer = styled('div')({

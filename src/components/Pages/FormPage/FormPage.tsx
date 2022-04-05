@@ -4,8 +4,6 @@ import Grid from '@mui/material/Grid';
 import { styled } from '@mui/system';
 
 import TextField from '@mui/material/TextField';
-import InputAdornment from '@mui/material/InputAdornment';
-import AccountCircle from '@mui/icons-material/AccountCircle';
 
 import Header from '../../Header/Header';
 
@@ -48,7 +46,7 @@ export default function FormPage() {
         <MainContainer>
 
             <Header />
-            
+
             <form>
                 <Grid container spacing={2}
                 // style={{backgroundColor: "green"}}
@@ -76,9 +74,7 @@ export default function FormPage() {
                             variant="outlined"
                             InputProps={{
                                 startAdornment: (
-                                    <InputAdornment position="start">
-                                        <AccountCircle />
-                                    </InputAdornment>
+                                    <img style={{ height: "25px", width: "25px", marginRight: "10px" }} src="https://svgshare.com/i/fzr.svg" alt="US FLAG"/>
                                 ),
                             }}
                             fullWidth
