@@ -45,7 +45,6 @@ const FormInput = styled(TextField)({
 
 export default function FormPage() {
     return (
-
         <MainContainer>
 
             <Header />

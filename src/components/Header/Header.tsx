@@ -17,7 +17,7 @@ export default function Header() {
     });
 
     const IconsContainer = styled('div')({
-        color: 'darkslategray',
+        color: '#000000',
         // backgroundColor: 'green',
         display: 'flex',
         justifyContent: 'flex-end',
@@ -26,24 +26,23 @@ export default function Header() {
     });
 
     const Date = styled(Typography)({
+        color: '#000000',
         whiteSpace: 'nowrap',
         fontWeight: 'bold',
     });
 
     const LogoContainer = styled('div')({
-        color: 'darkslategray',
         // backgroundColor: 'red',
         padding: '0.5rem',
         display: 'flex',
         marginBottom: "10px"
     });
 
-
     return (
         <>
             <StatusBar>
                 <Date>
-                    9:41 AM
+                    9:41
                 </Date>
                 <IconsContainer>
                     <SignalCellularAltIcon />
