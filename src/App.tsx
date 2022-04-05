@@ -2,8 +2,8 @@ import React from 'react';
 import { Routes, Route } from "react-router-dom";
 import { BrowserRouter } from "react-router-dom";
 
-import FormPage from "./components/FormPage/FormPage";
-import ThankYouPage from "./components/ThankYouPage/ThankYouPage"
+import FormPage from "./components/Pages/FormPage/FormPage";
+import ThankYouPage from "./components/Pages/ThankYouPage/ThankYouPage"
 import './App.css';
 
 function App() {

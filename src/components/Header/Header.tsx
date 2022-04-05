@@ -1,86 +1,47 @@
 import React from 'react'
-import Typography from '@mui/material/Typography';
-import Grid from '@mui/material/Grid';
 
 import { styled } from '@mui/system';
+import Typography from '@mui/material/Typography';
 
 import SignalCellularAltIcon from '@mui/icons-material/SignalCellularAlt';
 import NetworkWifiIcon from '@mui/icons-material/NetworkWifi';
 import Battery6BarIcon from '@mui/icons-material/Battery6Bar';
 
-import TextField from '@mui/material/TextField';
-import InputAdornment from '@mui/material/InputAdornment';
-import AccountCircle from '@mui/icons-material/AccountCircle';
+export default function Header() {
 
-const MainContainer = styled('div')({
-    color: 'darkslategray',
-    // backgroundColor: 'aliceblue',
-    padding: '0.5rem',
-    display: 'flex',
-    flexDirection: 'column',
-    gap: '1rem',
-});
+    const StatusBar = styled('div')({
+        color: 'darkslategray',
+        // backgroundColor: 'red',
+        padding: '0.5rem',
+        display: 'flex',
+    });
 
-const Header = styled('div')({
-    color: 'darkslategray',
-    // backgroundColor: 'red',
-    padding: '0.5rem',
-    display: 'flex',
-});
+    const IconsContainer = styled('div')({
+        color: 'darkslategray',
+        // backgroundColor: 'green',
+        display: 'flex',
+        justifyContent: 'flex-end',
+        gap: '0.2rem',
+        width: '100%',
+    });
 
-const IconsContainer = styled('div')({
-    color: 'darkslategray',
-    // backgroundColor: 'green',
-    display: 'flex',
-    justifyContent: 'flex-end',
-    gap: '0.2rem',
-    width: '100%',
-});
+    const Date = styled(Typography)({
+        whiteSpace: 'nowrap',
+        fontWeight: 'bold',
+    });
 
-const Date = styled(Typography)({
-    whiteSpace: 'nowrap',
-    fontWeight: 'bold',
-});
+    const LogoContainer = styled('div')({
+        color: 'darkslategray',
+        // backgroundColor: 'red',
+        padding: '0.5rem',
+        display: 'flex',
+        marginBottom: "10px"
+    });
 
-const LogoContainer = styled('div')({
-    color: 'darkslategray',
-    // backgroundColor: 'red',
-    padding: '0.5rem',
-    display: 'flex',
-    marginBottom: "10px"
-});
 
-const FormInput = styled(TextField)({
-    // backgroundColor: '#fff',
-
-    '& label.Mui-focused': {
-        color: 'grey',
-    },
-    '& .MuiInput-underline:after': {
-        borderBottomColor: '#DFDFDF',
-    },
-    '& .MuiOutlinedInput-root': {
-        '& fieldset': {
-            borderColor: '#DFDFDF',
-            borderWidth: '1px',
-        },
-        '&:hover fieldset': {
-            borderColor: '#DFDFDF',
-        },
-        '&.Mui-focused fieldset': {
-            borderColor: '#DFDFDF',
-            // border: "solid 1px red",
-        },
-    },
-
-})
-
-export default function FormPage() {
     return (
-
-        <MainContainer>
-
-            <Header>
+        <>
+            <StatusBar>
                 <Date>
                     9:41 AM
                 </Date>
@@ -89,7 +50,7 @@ export default function FormPage() {
                     <NetworkWifiIcon />
                     <Battery6BarIcon />
                 </IconsContainer>
-            </Header>
+            </StatusBar>
 
             <LogoContainer>
                 <svg cursor="pointer" width="100" height="40"
@@ -115,65 +76,6 @@ export default function FormPage() {
                 </svg>
             </LogoContainer>
 
-            <form>
-                <Grid container spacing={2}
-                // style={{backgroundColor: "green"}}
-                >
-
-                    <Grid item xs={6}>
-                        <FormInput
-                            id="outlined-basic"
-                            label="First Name"
-                            variant="outlined"
-                        />
-                    </Grid>
-
-                    <Grid item xs={6}>
-                        <FormInput
-                            id="outlined-basic"
-                            label="Last Name"
-                            variant="outlined"
-                        />
-                    </Grid>
-
-                    <Grid item xs={12}>
-                        <FormInput id="outlined-basic"
-                            label="Phone Number"
-                            variant="outlined"
-                            InputProps={{
-                                startAdornment: (
-                                    <InputAdornment position="start">
-                                        <AccountCircle />
-                                    </InputAdornment>
-                                ),
-                            }}
-                            fullWidth
-                        />
-                    </Grid>
-
-                    <Grid item xs={12}>
-                        <FormInput
-                            type="email"
-                            id="outlined-basic"
-                            label="Email"
-                            variant="outlined"
-                            fullWidth
-                        />
-                    </Grid>
-
-                    <Grid item xs={12}>
-                        <FormInput
-                            type="password"
-                            id="outlined-basic"
-                            label="Password"
-                            variant="outlined"
-                            fullWidth
-                        />
-                    </Grid>
-
-                </Grid>
-            </form>
-
-        </MainContainer>
+        </>
     )
 }
