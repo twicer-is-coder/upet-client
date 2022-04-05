@@ -9,7 +9,7 @@ export default function ThankYouPage() {
 
     const MainContainer = styled('div')({
         // backgroundColor: 'aliceblue',
-        padding: '0.5rem',
+        padding: '0.5rem 1rem',
         display: 'flex',
         flexDirection: 'column',
         gap: '1rem',
