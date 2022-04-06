@@ -3,6 +3,8 @@ import Grid from '@mui/material/Grid';
 import { styled } from '@mui/system';
 import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
+import CircularProgress from '@mui/material/CircularProgress';
+import { useNavigate } from "react-router-dom"
 
 import Header from '../../Header/Header';
 
@@ -98,6 +100,8 @@ export default function FormPage() {
         phoneNo: string,
     }
 
+    const navigate = useNavigate()
+
     const [formFields, setFormFields] = React.useState<IFormFields>({
         firstName: '',
         lastName: '',
@@ -111,7 +115,9 @@ export default function FormPage() {
         password: false,
     } as IFormErrors);
 
-    const [validForm, setValidForm] = React.useState<boolean>(false)
+    const [validForm, setValidForm] = React.useState<boolean>(true)
+
+    const [loading, setLoading] = React.useState<boolean>(false)
 
     const handleName = (e: React.ChangeEvent<HTMLInputElement>) => {
         setFormFields({ ...formFields, [e.target.id]: e.target.value.charAt(0).toUpperCase() + e.target.value.slice(1) });
@@ -141,21 +147,48 @@ export default function FormPage() {
 
     const validateForm = () => {
         const { email: emailError, password: passwordError } = formErrors;
-        const { firstName, lastName, email, password, phoneNo} = formFields;
+        const { firstName, lastName, email, password, phoneNo } = formFields;
 
         if (!emailError && !passwordError && firstName !== "" && lastName !== "" && email !== "" && password !== "" && phoneNo !== "")
             setValidForm(true);
         else setValidForm(false);
     }
 
-    React.useEffect(validateForm, [formFields,formErrors])
+    React.useEffect(validateForm, [formFields, formErrors])
+
+    async function handleSubmit(event: React.SyntheticEvent<HTMLFormElement>) {
+        event.preventDefault()
+        setLoading(true)
+        try {
+            const requestOptions = {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(formFields)
+            };
+            const res = await fetch('http://localhost:3030/api/users', requestOptions)
+
+            if (res.status === 200) {
+                const data: IFormFields = await res.json()
+                console.log(data)
+                navigate("/thankyou")
+            } else alert("Unable To Save The Data.")
+        }
+        catch (err) {
+            console.error(err)
+            const _e = err as Error
+            alert(_e.message)
+        }
+        finally {
+            setLoading(false)
+        }
+    }
 
     return (
         <MainContainer>
 
             <Header />
 
-            <form>
+            <form onSubmit={handleSubmit}>
                 <Grid container spacing={2}
                 >
 
@@ -224,7 +257,17 @@ export default function FormPage() {
                     </Grid>
 
                     <Grid item xs={12}>
-                        <SubmitButton type="submit" fullWidth variant="contained" disabled={!validForm}>Next</SubmitButton>
+                        <SubmitButton
+                            type="submit"
+                            fullWidth
+                            variant="contained"
+                            disabled={!validForm}
+                        >
+                            {loading ?
+                                <CircularProgress style={{ color: "#fff" }} />
+                                : "Next"
+                            }
+                        </SubmitButton>
                     </Grid>
 
                 </Grid>
