@@ -1,11 +1,24 @@
 import React from 'react'
 import { styled } from '@mui/system';
+import { useNavigate } from "react-router-dom"
 
 import DraftIcon from '@mui/icons-material/Drafts';
 import Typography from '@mui/material/Typography';
 
 import Header from '../../Header/Header';
+import { useUser } from '../../contexts/UserContext'
+
 export default function ThankYouPage() {
+
+    const { formFields } = useUser();
+    const navigate = useNavigate()
+
+    React.useEffect(() => {
+        if (formFields.firstName === "" || formFields.phoneNo === "" || formFields.email === "" || formFields.lastName === "" || formFields.password === "")
+            navigate("/")
+
+        //eslint-disable-next-line
+    }, [])
 
     const MainContainer = styled('div')({
         padding: '0.5rem 1rem',
@@ -44,15 +57,14 @@ export default function ThankYouPage() {
             <MessageLogoContainer>
                 <Letter />
                 <div>
-                    <Message>Thanks, Juan!</Message>
+                    <Message>Thanks, {formFields.firstName}!</Message>
                     <Message>We've received your application</Message>
                 </div>
             </MessageLogoContainer>
 
             <Notice>
                 We'll process your application as soon as possible
-                and send you a decision within 30 days to (914)
-                740-5693 or juanperez53gmail.com. We will
+                and send you a decision within 30 days to {formFields.phoneNo} or {formFields.email}. We will
                 contact you in case more information is needed.
             </Notice>
 

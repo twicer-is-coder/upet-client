@@ -7,6 +7,7 @@ import CircularProgress from '@mui/material/CircularProgress';
 import { useNavigate } from "react-router-dom"
 
 import Header from '../../Header/Header';
+import { useUser, IFormFields } from '../../contexts/UserContext'
 
 const MainContainer = styled('div')({
     padding: '0.5rem 1rem',
@@ -84,7 +85,6 @@ const validateEmail: (emailAdress: string) => boolean = emailAdress => {
 
 const validatePassword: (password: string) => boolean = password => /^(?=.*[a-z])(?=.*[A-Z])[a-zA-Z\d]{8,}$/.test(password)
 
-
 export default function FormPage() {
 
     interface IFormErrors {
@@ -92,23 +92,9 @@ export default function FormPage() {
         password: boolean,
     }
 
-    interface IFormFields {
-        firstName: string,
-        lastName: string,
-        email: string,
-        password: string,
-        phoneNo: string,
-    }
+    const { formFields, setFormFields } = useUser();
 
     const navigate = useNavigate()
-
-    const [formFields, setFormFields] = React.useState<IFormFields>({
-        firstName: '',
-        lastName: '',
-        email: '',
-        password: '',
-        phoneNo: '',
-    } as IFormFields);
 
     const [formErrors, setFormErrors] = React.useState<IFormErrors>({
         email: false,
@@ -141,8 +127,6 @@ export default function FormPage() {
             setFormErrors({ ...formErrors, password: true });
         else
             setFormErrors({ ...formErrors, password: false });
-
-        console.log("RGEX", validatePassword(e.target.value))
     }
 
     const validateForm = () => {

@@ -6,8 +6,11 @@ import FormPage from "./components/Pages/FormPage/FormPage";
 import ThankYouPage from "./components/Pages/ThankYouPage/ThankYouPage"
 import './App.css';
 
+import { UserProvider } from './components/contexts/UserContext'
+
 function App() {
   return (
+    <UserProvider>
       <BrowserRouter>
         <div className="app">
           <Routes>
@@ -16,6 +19,7 @@ function App() {
           </Routes>
         </div>
       </BrowserRouter>
+    </UserProvider>
   );
 }
 
