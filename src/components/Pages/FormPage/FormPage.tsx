@@ -7,7 +7,6 @@ import Button from '@mui/material/Button';
 import Header from '../../Header/Header';
 
 const MainContainer = styled('div')({
-    // backgroundColor: 'aliceblue',
     padding: '0.5rem 1rem',
     display: 'flex',
     flexDirection: 'column',
@@ -15,7 +14,6 @@ const MainContainer = styled('div')({
 });
 
 const FormInput = styled(TextField)({
-    // backgroundColor: '#fff',
 
     '& label.Mui-focused': {
         color: '#31E6C0',
@@ -33,7 +31,6 @@ const FormInput = styled(TextField)({
         },
         '&.Mui-focused fieldset': {
             borderColor: '#DFDFDF',
-            // border: "solid 1px red",
         },
     },
 
@@ -148,7 +145,6 @@ export default function FormPage() {
 
             <form>
                 <Grid container spacing={2}
-                // style={{backgroundColor: "green"}}
                 >
 
                     <Grid item xs={6}>
@@ -158,8 +154,6 @@ export default function FormPage() {
                             id="firstName"
                             label="First Name"
                             variant="outlined"
-                            helperText="Please enter your first name"
-                            error={formFields.firstName === ""}
                         />
                     </Grid>
 

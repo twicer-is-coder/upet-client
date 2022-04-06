@@ -10,15 +10,12 @@ import Battery6BarIcon from '@mui/icons-material/Battery6Bar';
 export default function Header() {
 
     const StatusBar = styled('div')({
-        color: 'darkslategray',
-        // backgroundColor: 'red',
         padding: '0.5rem',
         display: 'flex',
     });
 
     const IconsContainer = styled('div')({
         color: '#000000',
-        // backgroundColor: 'green',
         display: 'flex',
         justifyContent: 'flex-end',
         gap: '0.2rem',
@@ -32,7 +29,6 @@ export default function Header() {
     });
 
     const LogoContainer = styled('div')({
-        // backgroundColor: 'red',
         padding: '0.5rem',
         display: 'flex',
         marginBottom: "10px"

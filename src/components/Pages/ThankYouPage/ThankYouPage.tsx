@@ -8,7 +8,6 @@ import Header from '../../Header/Header';
 export default function ThankYouPage() {
 
     const MainContainer = styled('div')({
-        // backgroundColor: 'aliceblue',
         padding: '0.5rem 1rem',
         display: 'flex',
         flexDirection: 'column',
