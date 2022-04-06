@@ -73,7 +73,7 @@ const getFormattedPhoneNum = (input: string) => {
 }
 
 const validateEmail: (emailAdress: string) => boolean = emailAdress => {
-    let regexEmail = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
+    let regexEmail = /^\w+(.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/;
     if (emailAdress.match(regexEmail))
         return true;
     else
@@ -81,6 +81,7 @@ const validateEmail: (emailAdress: string) => boolean = emailAdress => {
 }
 
 const validatePassword: (password: string) => boolean = password => /^(?=.*[a-z])(?=.*[A-Z])[a-zA-Z\d]{8,}$/.test(password)
+
 
 export default function FormPage() {
 
@@ -110,6 +111,8 @@ export default function FormPage() {
         password: false,
     } as IFormErrors);
 
+    const [validForm, setValidForm] = React.useState<boolean>(false)
+
     const handleName = (e: React.ChangeEvent<HTMLInputElement>) => {
         setFormFields({ ...formFields, [e.target.id]: e.target.value.charAt(0).toUpperCase() + e.target.value.slice(1) });
     }
@@ -136,7 +139,16 @@ export default function FormPage() {
         console.log("RGEX", validatePassword(e.target.value))
     }
 
-    React.useEffect(() => { console.log(formFields) }, [formFields])
+    const validateForm = () => {
+        const { email: emailError, password: passwordError } = formErrors;
+        const { firstName, lastName, email, password, phoneNo} = formFields;
+
+        if (!emailError && !passwordError && firstName !== "" && lastName !== "" && email !== "" && password !== "" && phoneNo !== "")
+            setValidForm(true);
+        else setValidForm(false);
+    }
+
+    React.useEffect(validateForm, [formFields,formErrors])
 
     return (
         <MainContainer>
@@ -212,7 +224,7 @@ export default function FormPage() {
                     </Grid>
 
                     <Grid item xs={12}>
-                        <SubmitButton fullWidth variant="contained">Next</SubmitButton>
+                        <SubmitButton type="submit" fullWidth variant="contained" disabled={!validForm}>Next</SubmitButton>
                     </Grid>
 
                 </Grid>
