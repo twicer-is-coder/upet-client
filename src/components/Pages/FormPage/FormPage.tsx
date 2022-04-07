@@ -149,7 +149,11 @@ export default function FormPage() {
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify(formFields)
             };
-            const res = await fetch('http://localhost:3030/api/users', requestOptions)
+          
+            const API_URL = process.env.NODE_ENV === 'production' ? 'https://shrouded-dawn-17649.herokuapp.com/' : 'http://localhost:3030/api/users';
+            console.log("API_URL", API_URL)
+          
+            const res = await fetch(API_URL, requestOptions)
 
             if (res.status === 200) {
                 const data: IFormFields = await res.json()
