@@ -150,7 +150,7 @@ export default function FormPage() {
                 body: JSON.stringify(formFields)
             };
           
-            const API_URL = process.env.NODE_ENV === 'production' ? 'https://shrouded-dawn-17649.herokuapp.com/' : 'http://localhost:3030/api/users';
+            const API_URL = process.env.NODE_ENV === 'production' ? 'https://shrouded-dawn-17649.herokuapp.com/api/users' : 'http://localhost:3030/api/users';
             console.log("API_URL", API_URL)
           
             const res = await fetch(API_URL, requestOptions)
